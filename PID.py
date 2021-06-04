@@ -14,8 +14,8 @@ def gradiant(p1, p2):
     try:
         val = (p1[1] - p2[1]) / (p1[0] - p2[0])
     except ZeroDivisionError:
-        print("Zero")
-        return 0
+        print("Zero 1 p1:", p1, "p2:", p2)
+        return (p1[1] - p2[1])
     return val
 
 
@@ -24,12 +24,17 @@ def calculateAngle(line1, line2):
     _, p3 = line2
     m1 = gradiant(p1, p2)
     m2 = gradiant(p1, p3)
-    return abs(math.atan((m2 - m1) / (1 + m2 * m1)))
+    try:
+        val = abs(math.atan((m2 - m1) / (1 + m2 * m1)))
+    except ZeroDivisionError:
+        print("Zero 2 m1:", m1, "m2:", m2)
+        return (m2 - m1)
+    return val
 
 
 class PID_regelaar:
     def __init__(self):
-        self.global_bias = 90
+        self.global_bias = 110
 
         self.p_bias = 0
         self.p_weight = 1/20
@@ -41,7 +46,7 @@ class PID_regelaar:
         self.i_last = None
 
         self.d_bias = 0
-        self.d_weight = 1
+        self.d_weight = 1.1
         self.d_memory = None
         self.d_last = None
 

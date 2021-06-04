@@ -1,7 +1,7 @@
 import serial
 import struct
 
-ser = serial.Serial('COM6', baudrate=9600)
+ser = serial.Serial('COM8', baudrate=9600)
 
 def check_connected():
     global ser
